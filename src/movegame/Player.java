@@ -18,34 +18,32 @@ public class Player {
 		
 	}
 	public void moveLeft() {
-		x -= 2;
+	      if (x > 0)
+	    	  x -= 5;
 	      image.setRotation(270);
-	      if (x+40 == 0)
-	    	  x = 800;
 		
 	}
 
 	public void moveRight() {
-		x += 2;
+	      if (x< 780)
+	    	  x += 5;
 	      image.setRotation(90);
-	      if (x+40 == 800)
-	    	  x = 0;
 		
 	}
 
 	public void moveDown() {
-		y += 2;
+		//y += 2;
+	      //image.setRotation(180);
+	      if (y < 580)
+	    	  y += 5;
 	      image.setRotation(180);
-	      if (y+40 == 600)
-	    	  y = 0;
 		
 	}
 
 	public void moveUp() {
-		y -= 2;
+	      if (y > 0)
+	    	  y -= 5;
 	      image.setRotation(0);
-	      if (y+40 == 0)
-	    	  y = 600;
 		
 		
 	}

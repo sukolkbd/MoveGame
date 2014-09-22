@@ -39,7 +39,7 @@ public class MoveGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		player = new Player(100,100);
+		player = new Player(GAME_WIDTH/2-10,GAME_HEIGHT/2-10);
 		
 	}
 	void updatePlayerMovement(Input input, int delta)
