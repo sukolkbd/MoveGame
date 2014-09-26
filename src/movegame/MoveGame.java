@@ -1,11 +1,13 @@
 package movegame;
+
+import java.util.Random;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
 import movegame.Player;
 
 
@@ -14,6 +16,9 @@ public class MoveGame extends BasicGame {
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 	private Player player;
+	private Enemy enemy;
+	Random randomX = new Random();
+	Random randomY = new Random();
 	public MoveGame(String title) {
 		super(title);
 	}
@@ -23,7 +28,7 @@ public class MoveGame extends BasicGame {
 			  MoveGame game = new MoveGame("Super Move Game");
 		      AppGameContainer container = new AppGameContainer(game);
 		      container.setDisplayMode(GAME_WIDTH, GAME_HEIGHT, false);
-		      container.setMinimumLogicUpdateInterval(1000 / 60);
+		      container.setMinimumLogicUpdateInterval(1000/60);
 		      container.start();
 		    } catch (SlickException e) {
 		      e.printStackTrace();
@@ -34,13 +39,13 @@ public class MoveGame extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		player.draw();
-		
+		enemy.draw();
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		player = new Player(GAME_WIDTH/2-10,GAME_HEIGHT/2-10);
-		
+		enemy=new Enemy(randomX.nextInt(780),(randomY.nextInt(2)-randomY.nextInt(1))*540);
 	}
 	void updatePlayerMovement(Input input, int delta)
 	{
@@ -59,12 +64,14 @@ public class MoveGame extends BasicGame {
 		    	player.moveUp();
 			}
 	}
+	
+	
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
 		updatePlayerMovement(input, delta);
-		
+		enemy.moveTo(player.x,player.y);
 	}
 
 }

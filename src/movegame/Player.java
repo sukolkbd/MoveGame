@@ -5,8 +5,8 @@ import org.newdawn.slick.SlickException;
 
 public class Player {
 	private Image image;
-	private int x;
-	private int y;
+	int x;
+	int y;
 	
 	public Player(int x, int y) throws SlickException {
 		image = new Image("res/player.png");
@@ -32,8 +32,6 @@ public class Player {
 	}
 
 	public void moveDown() {
-		//y += 2;
-	      //image.setRotation(180);
 	      if (y < 580)
 	    	  y += 5;
 	      image.setRotation(180);
