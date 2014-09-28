@@ -1,64 +1,51 @@
 package movegame;
 
-import java.util.Random;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 
-public class Enemy {
+public class Enemy{
 	private Image image;
 	protected int x;
 	protected int y;
-	private int z;
-	private Random random =new Random();
+	private int vx;
+	private int vy;
 
 	public Enemy(int x, int y) throws SlickException {
 		image = new Image("res/enemy.png");
 		this.x = x;
 	    this.y = y;
-	    
 }
-	public void draw() {
-		image.draw(x, y);
-		
+	public void render(){
+		image.draw(x,y);
 	}
-	public void moveTo(int x,int y){
+	public void update(){
+		//moveTo(player.x-20,player.y-20);
+	}
+	public void moveTo(int x,int y,int z){
+		Changevelocity(x, y,z);
 		if(x>=this.x){
-			this.x+=1;
+			this.x+=vx;
 			if(y>this.y){
-				this.y+=1;
-			}else  this.y-=1;}
+				this.y+=vy;
+			}else  this.y-=vy;}
 		else if(x<this.x){
-			this.x-=1;
+			this.x-=vx;
 			if(y>this.y){
-				this.y+=1;
-			}else this.y-=1;
+				this.y+=vy;
+			}else this.y-=vy;
 			}
-		}	
+		}			
 				
-				
-				
-				
-				
-				/*image.setRotation(random.nextInt(6)*60);
-		int i=0;
-		z=(int) Math.pow(-1, random.nextInt(2));
-		if(i <10){
-			x+=z;
-			i++;}
-		z=(int) Math.pow(-1, random.nextInt(2));
-		if(i >10){
-			y+=z;
-			i--;}
-		//z=random.nextInt()-random.nextInt();
-		//x+=z;
-		//y+=z;*/
 	
-	public void Setposition(int x,int y) {
-		this.x=x;
-		this.y=y;
-		
+	public void Changevelocity(int x,int y,int z) {
+		if(Math.abs(this.x-x)>=Math.abs(this.y-y)){
+			vx=2+z;
+			vy=1+z;}
+		else if(Math.abs(this.x-x)<Math.abs(this.y-y)){
+			vx=1+z;
+			vy=2+z;
+		}
 	}
 }
 
