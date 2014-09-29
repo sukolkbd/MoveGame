@@ -14,11 +14,13 @@ import movegame.Player;
 
 
 public class MoveGame extends BasicGame {
+	private boolean isStarted;
+	private boolean isGameOver;
 	public static final int GAME_WIDTH = 800;
 	public static final int GAME_HEIGHT = 600;
 	private Player player;
 	private Enemy[] enemies;
-	private int numberofenemy=10;
+	private int numberofenemy=0;
 	Random randomX = new Random();
 	Random randomY = new Random();
 	public MoveGame(String title) {
@@ -45,15 +47,18 @@ public class MoveGame extends BasicGame {
 		enemy.render();
 	}
 	private void initEnemies() throws SlickException{
-		enemies = new Enemy[numberofenemy];
-		for(int i =0;i<numberofenemy;i++){
+		enemies = new Enemy[20];
+		
+		for(numberofenemy =0;numberofenemy<20;numberofenemy+=2){
+			enemies[numberofenemy]=new Enemy((randomX.nextInt(2)-randomX.nextInt(1))*780,randomY.nextInt(580));
+			enemies[numberofenemy+1]=new Enemy(randomX.nextInt(780),(randomY.nextInt(2)-randomY.nextInt(1))*580);
 			
-			enemies[i]=new Enemy((randomX.nextInt(2)-randomX.nextInt(1))*740,randomY.nextInt(580));
 		}
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
+		isStarted=false;
 		player = new Player(GAME_WIDTH/2-10,GAME_HEIGHT/2-10);
 		initEnemies();
 	}
@@ -74,19 +79,33 @@ public class MoveGame extends BasicGame {
 		    	player.moveUp();
 			}
 	}
-	
+	public void Keystart(Input input){
+		if (input.isKeyDown(Input.KEY_SPACE)) {
+			  isStarted=true;}
+	}
 	
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		Input input = container.getInput();
+		Keystart(input);
+		if(isStarted == true){
 		updatePlayerMovement(input, delta);
-		
 		//enemy=new Enemy(randomX.nextInt(780),(randomY.nextInt(2)-randomY.nextInt(1))*540);
-		for(int i=0;i<numberofenemy;i++)
-		enemies[i].moveTo(player.x-20,player.y-20,randomX.nextInt(3));
+		for(int i=0;i<numberofenemy;i+=2){
+		enemies[i].moveTo(player.x,player.y,randomX.nextInt(4));
+		enemies[i+1].randommove(randomX.nextInt(3), randomY.nextInt(3));
 		//enemies[1].moveTo(player.x-20,player.y-20);
 		//enemies[2].moveTo(player.x-20,player.y-20);
-	}
+		}
+		for(Enemy enemy : enemies){
+			//enemy.update();
+		    if(player.isCollide(enemy)){
+		    	isStarted=false;
+		    	container.reinit();
+		    }
+		}	
+		}
+		}
 
 }

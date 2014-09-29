@@ -45,5 +45,8 @@ public class Player {
 		
 		
 	}
+	public boolean isCollide(Enemy e) {
+	    return Collision.isCollide(x, y, e.getX(),e.getY());
+	  }
 
 }
