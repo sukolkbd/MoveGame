@@ -22,9 +22,17 @@ public class Enemy{
 	public void update(){
 		//moveTo(player.x-20,player.y-20);
 	}
-	public void randommove(int x,int y){
-		if(this.x>=0&&this.x<780)
-			this.x+=x;
+	public void randommove(int y){
+		if(this.y==0)
+			vy=1;
+		if(this.x==0)
+			vx=1;
+		if(this.y==580)
+			vy=-3;
+		if(this.x==780)
+			vx=-3;
+		this.y+=vy+1;
+		this.x+=vx+1;
 		
 	}
 	public void moveTo(int x,int y,int z){

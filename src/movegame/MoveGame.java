@@ -47,9 +47,9 @@ public class MoveGame extends BasicGame {
 		enemy.render();
 	}
 	private void initEnemies() throws SlickException{
-		enemies = new Enemy[20];
+		enemies = new Enemy[30];
 		
-		for(numberofenemy =0;numberofenemy<20;numberofenemy+=2){
+		for(numberofenemy =0;numberofenemy<30;numberofenemy+=2){
 			enemies[numberofenemy]=new Enemy((randomX.nextInt(2)-randomX.nextInt(1))*780,randomY.nextInt(580));
 			enemies[numberofenemy+1]=new Enemy(randomX.nextInt(780),(randomY.nextInt(2)-randomY.nextInt(1))*580);
 			
@@ -91,15 +91,8 @@ public class MoveGame extends BasicGame {
 		Keystart(input);
 		if(isStarted == true){
 		updatePlayerMovement(input, delta);
-		//enemy=new Enemy(randomX.nextInt(780),(randomY.nextInt(2)-randomY.nextInt(1))*540);
-		for(int i=0;i<numberofenemy;i+=2){
-		enemies[i].moveTo(player.x,player.y,randomX.nextInt(4));
-		enemies[i+1].randommove(randomX.nextInt(3), randomY.nextInt(3));
-		//enemies[1].moveTo(player.x-20,player.y-20);
-		//enemies[2].moveTo(player.x-20,player.y-20);
-		}
+		moveenemy();
 		for(Enemy enemy : enemies){
-			//enemy.update();
 		    if(player.isCollide(enemy)){
 		    	isStarted=false;
 		    	container.reinit();
@@ -107,5 +100,12 @@ public class MoveGame extends BasicGame {
 		}	
 		}
 		}
+	public void moveenemy(){
+		for(int i=0;i<numberofenemy;i+=3){
+			enemies[i].moveTo(player.x,player.y,randomX.nextInt(4));
+			enemies[i+1].randommove(0);
+			enemies[i+2].randommove(0);
+			}
+	}
 
 }
