@@ -31,6 +31,7 @@ public class Enemy{
 			vy=-3;
 		if(this.x>=780)
 			vx=-3;
+		
 		this.y+=vy+1;
 		this.x+=vx+1;
 		
@@ -41,12 +42,15 @@ public class Enemy{
 			this.x+=vx;
 			if(y>this.y){
 				this.y+=vy;
-			}else  this.y-=vy;}
+				}
+			else  this.y-=vy;
+			}
 		else if(x<this.x){
 			this.x-=vx;
 			if(y>this.y){
 				this.y+=vy;
-			}else this.y-=vy;
+				}
+			else this.y-=vy;
 			}
 		}			
 				
@@ -54,12 +58,13 @@ public class Enemy{
 	public void Changevelocity(int x,int y,int z) {
 		if(Math.abs(this.x-x)>=Math.abs(this.y-y)){
 			vx=1+z;
-			vy=z;}
+			vy=z;
+			}
 		else if(Math.abs(this.x-x)<Math.abs(this.y-y)){
 			vx=z;
 			vy=1+z;
+			}
 		}
-	}
 	public float getX() { return this.x; }
 	public float getY() { return this.y; }
 }
