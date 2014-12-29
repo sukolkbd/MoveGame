@@ -5,6 +5,7 @@ import org.newdawn.slick.SlickException;
 
 public class Player {
 	private Image image;
+	
 	int x;
 	int y;
 	

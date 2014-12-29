@@ -6,8 +6,10 @@ import org.newdawn.slick.SlickException;
 
 public class Enemy{
 	private Image image;
+	
 	protected int x;
 	protected int y;
+	
 	private int vx;
 	private int vy;
 

@@ -139,7 +139,7 @@ public class MoveGame extends BasicGame {
 	}
 	public void time(){
 		t++;
-		if(t%60==0){
+		if(t%50==0){
 			sec++;
 			if(sec==60){
 				min++;
